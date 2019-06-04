@@ -1,0 +1,285 @@
+<style>
+    body{
+      text-align: center;
+    }
+  
+</style>
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/glow.2.7.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/RSrun.2.7.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {fontloading();
+ var __rt=srequire('streamline/lib/callbacks/runtime').runtime(__filename, false),__func=__rt.__func,__cb=__rt.__cb; var RS_modules = {};
+var running, re, end, cho, g, f, t, ball, pointer1, pointer2, btrail, ga, tmax, gxmax, gymax, vy, dt, recover;
+RS_modules.pythonize = {};
+
+(function() {
+  function strings() {
+    var string_funcs, exclude, name;
+    string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+    if (!arguments.length) {
+      exclude = (function() {
+        var s = RS_set();
+        s.jsset.add("split");
+        s.jsset.add("replace");
+        return s;
+      })(); }
+     else if (arguments[0]) {
+      exclude = Array.prototype.slice.call(arguments); }
+     else {
+      exclude = null; }  ;
+
+    if (exclude) {
+      string_funcs = string_funcs.difference(set(exclude)); } ;
+
+    var RS_Iter0 = RS_Iterable(string_funcs);
+    for (var RS_Index0 = 0; RS_Index0["<"](RS_Iter0.length); RS_Index0++) {
+      name = RS_Iter0[RS_Index0];
+      (RS_expr_temp = String.prototype)[((((typeof name === "number") && name["<"](0))) ? RS_expr_temp.length["+"](name) : name)] = (RS_expr_temp = RS_str.prototype)[((((typeof name === "number") && name["<"](0))) ? RS_expr_temp.length["+"](name) : name)]; }; };  RS_modules.pythonize.strings = strings;
+})();
+function main(_) { var version, box, sphere, simple_sphere, cylinder, pyramid, cone, helix, ellipsoid, ring, arrow, compound, display, vector, print, type, scene, RS_ls, pi, g, ga, re, running, end, origin, k, t, v0, theta, vx, vy, vz, yrange, xrange, flen1, fwid1, fh, bradius, dt, vfac, gfac, arw, initp, initv, inita, cmpos, cmcenter, cmaxis, lamp, b1, b2, b3, sl, wt, sl1, wt1, sl2, wt2, sl3, wt3, recover, g2, gxmax, gymax, tmax, Te, __name__, strings, __this = this;
+
+  function s1(s) {
+    var RS_ls;
+    "56";
+    wt.text = "{:1.2f}".format(s.value); };
+
+
+  function s2(s) {
+    var RS_ls;
+    "62";
+    wt1.text = "{:1.2f}".format(s.value); };
+
+
+  function s3(s) {
+    var RS_ls;
+    "65";
+    wt2.text = "{:1.2f}".format(s.value); };
+
+
+  function s4(s) {
+    var RS_ls;
+    "68";
+    wt3.text = "{:1.2f}".format(s.value); };
+
+
+  function run(b1) {
+    var RS_ls;
+    "71";
+    "72";
+    running = !running; };
+
+
+  function reset(b2) {
+    var RS_ls;
+    "75";
+    "76";
+    re = !re; };
+
+
+  function stop(b3) {
+    var RS_ls;
+    "79";
+    "80";
+    end = !end; };
+  function M(m) {
+    var RS_ls;
+    "124";
+    "125";
+    "126";
+    "159";
+    cho = m.index; };
+
+
+  function setup() {
+    var RS_ls, floor, poninter2;
+    "213";
+    "214";
+    "215";
+    "216";
+    "223";
+    floor = RS_interpolate_kwargs.call(this, box, [RS_desugar_kwargs({ pos: vec(0, 0, 0), size: vec(flen1, fh, fwid1), opacity: 0.8, emissive: false, shininess: 0.7, color: color.gray(0.8), texture: textures.wood }),]);
+    "226";
+    ball = RS_interpolate_kwargs.call(this, sphere, [RS_desugar_kwargs({ pos: initp, emissive: false, shininess: 0.9, radius: bradius, color: color.gray(0.8) }),]);
+    "227";
+    ball.v = initv;
+    "228";
+    ball.a = inita;
+    "235";
+    cho = 0;
+    "262";
+    pointer1 = RS_interpolate_kwargs.call(this, attach_arrow, [ball,"v",].concat([RS_desugar_kwargs({ scale: vfac, shaftwidth: bradius["*"](0.5), color: color.yellow }),]));
+    "264";
+    btrail = RS_interpolate_kwargs.call(this, attach_trail, [ball,].concat([RS_desugar_kwargs({ radius: 0.1["*"](bradius), color: color.gray(0.9) }),]));
+    "266";
+    poninter2 = RS_interpolate_kwargs.call(this, attach_arrow, [ball,"a",].concat([RS_desugar_kwargs({ scale: gfac, shaftwidth: bradius["*"](0.5), color: color.red }),])); };  function motion(_) { var RS_ls, count; var __frame = { name: "motion", line: 328 }; return __func(_, this, arguments, motion, 0, __frame, function __$motion() {
+
+      "279";
+      "280";
+      "281";
+      "283";
+      count = 1;
+      "289"; return (function ___(__break) { var __more; var __loop = __cb(_, __frame, 0, 0, function __$motion() { __more = false;
+          var __1 = ((((recover !== 0) && (((typeof recover !== "object") || RS_not_equals(recover, 0))))) && (((re === false) || ((typeof re === "object") && RS_equals(re, false))))); if (__1) {
+            "290";
+            return rate(900000, __cb(_, __frame, 10, 12, function __$motion() {
+              "291"; return (function __$motion(__then) {
+                if ((ball.pos.x["<="](0.5["*"](flen1)) && ball.pos.y["<="](0))) {
+                  "292";
+                  ball.pos.y = ball.pos.y["-u"]();
+                  "293";
+                  ball.v.y = recover["-u"]()["*"](ball.v.y);
+                  "294";
+                  ball.v.x = recover["*"](ball.v.x);
+                  "295";
+                  ball.a = vec(0, 1["+"](recover)["*"](ball.v.y)["/"](2.5), 0);
+                  "299";
+                  return sleep(0.015, __cb(_, __frame, 22, 16, function __$motion() {
+                    "302"; __then(); }, true)); } else {
+
+                  "303";
+                  ball.a = ga;
+                  "304";
+                  ball.v = ball.v["+"](ball.a["*"](dt)); __then(); } ; })(function __$motion() {
+
+                "314";
+                ball.pos = ball.pos["+"](ball.v["*"](dt));
+                "319";
+                t = t["+"](dt);
+                "320";
+                count = count["+"](1);
+                "321";
+                if (ball.pos.y["<="](500["-u"]())) { return __break(); } ;
+
+
+                "322";
+                if ((ball.pos.y["<="](0.0001) && mag(ball.v)["<="](0.0001))) {
+                  "323";
+                  ball.a = vec(0, 0, 0);
+                  "324"; return __break(); } ; while (__more) { __loop(); }; __more = true; }); }, true)); } else { __break(); } ; }); do { __loop(); } while (__more); __more = true; })(function __$motion() {        "326"; return (function ___(__break) { var __more; var __loop = __cb(_, __frame, 0, 0, function __$motion() { __more = false;
+            var __4 = (((((recover === 0) || ((typeof recover === "object") && RS_equals(recover, 0)))) && ball.pos.y[">="](0)) && (((re === false) || ((typeof re === "object") && RS_equals(re, false))))); if (__4) {
+              "327";
+              return rate(900000, __cb(_, __frame, 51, 12, function __$motion() {
+                "328";
+                ball.a = ga;
+                "329";
+                ball.v = ball.v["+"](ball.a["*"](dt));
+                "330";
+                ball.pos = ball.pos["+"](ball.v["*"](dt));
+                "332";
+                t = t["+"](dt);
+                "343";
+                count = count["+"](1); while (__more) { __loop(); }; __more = true; }, true)); } else { __break(); } ; }); do { __loop(); } while (__more); __more = true; })(function __$motion() {
+
+          "345";
+          running = false;
+          "346"; return _(null); }); }); }); };  function init() {
+    var RS_ls, v0, theta, vx, vz, initv, g1, t;
+    "349";
+    "350";
+    "351";
+    "352";
+    "353";
+    "354";
+    "355";
+    "356";
+    "363";
+    v0 = sl.value;
+    "364";
+    theta = sl1.value;
+    "365";
+    vx = v0["*"](cos(theta["*"](pi)["/"](180)));
+    "366";
+    vy = v0["*"](sin(theta["*"](pi)["/"](180)));
+    "367";
+    vz = 0;
+    "368";
+    recover = sl3.value;
+    "369";
+    initv = vec(vx, vy, vz);
+    "370";
+    g1 = sl2.value;
+    "371";
+    ga = vec(0, g1["-u"](), 0);
+    "372";
+    gxmax = 2["*"](vx)["*"](vy)["/"](g1);
+    "373";
+    gymax = GS_power(vy, 2)["/"](g1)["/"](2);
+    "375";
+    if ((((recover === 0) || ((typeof recover === "object") && RS_equals(recover, 0))))) {
+      "376";
+      tmax = 2["*"](vy)["/"](g1);
+      "377";
+      dt = 0.00004;
+      "384"; }
+     else {
+      "385";
+      tmax = 2["*"](flen1)["/"](vx);
+      "386";
+      gxmax = 1.02["*"](flen1);
+      "387";
+      dt = 0.00003; } ;
+
+    "389";
+    if (vx["<="](0.0001)) {
+      "390";
+      tmax = 12["*"](vy)["/"](g);
+      "391";
+      gxmax = 0; } ;
+
+    "393";
+    ball.pos = initp;
+    "394";
+    ball.v = initv;
+    "395";
+    ball.a = ga;
+    "418";
+    t = 0;
+    "419";
+    re = false;
+    "420";
+    running = false; }; var __frame = { name: "main", line: 33 }; return __func(_, this, arguments, main, 0, __frame, function __$main() { version = RS_list_decorate(["2.7","glowscript",]); Array.prototype["+"] = function(r) { return this.concat(r); }; Array.prototype["*"] = function(r) { return __array_times_number(this, r); }; __name__ = "__main__"; window.__GSlang = "vpython"; box = vp_box; sphere = vp_sphere; simple_sphere = vp_simple_sphere; cylinder = vp_cylinder; pyramid = vp_pyramid; cone = vp_cone; helix = vp_helix; ellipsoid = vp_ellipsoid; ring = vp_ring; arrow = vp_arrow; compound = vp_compound; display = canvas; vector = vec; print = GSprint; type = pytype; scene = canvas(); return waitforfonts(__cb(_, __frame, 23, 4, function __$main() { strings = RS_modules.pythonize.strings; strings(); "4"; pi = 3.1415926; "5"; g = 10; "6"; ga = vec(0, g["-u"](), 0); "7"; re = false; "8"; running = false; "9"; end = false; "10"; origin = vec(0, 0, 0); "11"; k = 0.2; "12"; t = 0; "14"; v0 = 90; "15"; theta = 45; "16"; vx = v0["*"](cos(theta["*"](pi)["/"](180))); "17"; vy = v0["*"](sin(theta["*"](pi)["/"](180))); "18"; vz = 0; "20"; yrange = 0.5["*"](GS_power(vy, 2))["/"](2)["/"](g); "21"; xrange = 2["*"](vx)["*"](vy)["/"](g)["*"](0.5); "22"; flen1 = 3.6["*"](xrange); "25"; fwid1 = flen1["*"](1.5)["/"](12); "26"; fh = 0.005; "27"; bradius = xrange["/"](30); "28"; dt = 0.00002; "29"; vfac = bradius["*"](0.15); "30"; gfac = 0.6["*"](bradius); "31"; arw = fwid1["/"](500); "32"; initp = vec(0.5["-u"]()["*"](flen1)["+"](100), 0.000001, 0); "33"; initv = vec(vx, vy, vz); "34"; inita = ga; "37"; scene = RS_interpolate_kwargs.call(__this, canvas, [RS_desugar_kwargs({ title: " projectile motion ", width: 680, height: 560, autoscale: true, center: vec(0, 2["*"](yrange)["*"](0.7), 240) }),]); "39"; cmpos = scene.camera.pos; "40"; cmcenter = scene.center; "41"; cmaxis = scene.camera.axis; "42"; scene.range = max(xrange, yrange); "45"; lamp = RS_interpolate_kwargs.call(__this, local_light, [RS_desugar_kwargs({ pos: vec(0.1["*"](flen1), 25["+"](30), 0), color: vec(255["/"](255), 255["/"](255), 100["/"](255)) }),]); "54"; if (!s1.__argnames__) { Object.defineProperties(s1, { __argnames__: { value: ["s",] } }); } ; "61"; if (!s2.__argnames__) { Object.defineProperties(s2, { __argnames__: { value: ["s",] } }); } ; "64"; if (!s3.__argnames__) { Object.defineProperties(s3, { __argnames__: { value: ["s",] } }); } ; "67"; if (!s4.__argnames__) { Object.defineProperties(s4, { __argnames__: { value: ["s",] } }); } ; "70"; if (!run.__argnames__) { Object.defineProperties(run, { __argnames__: { value: ["b1",] } }); } ; "74"; if (!reset.__argnames__) { Object.defineProperties(reset, { __argnames__: { value: ["b2",] } }); } ; "78"; if (!stop.__argnames__) { Object.defineProperties(stop, { __argnames__: { value: ["b3",] } }); } ; "82"; b1 = RS_interpolate_kwargs.call(__this, button, [RS_desugar_kwargs({ text: "Run", pos: scene.title_anchor, bind: run }),]); "83"; b2 = RS_interpolate_kwargs.call(__this, button, [RS_desugar_kwargs({ text: "Reset", pos: scene.title_anchor, bind: reset }),]); "84"; b3 = RS_interpolate_kwargs.call(__this, button, [RS_desugar_kwargs({ text: "Stop", pos: scene.title_anchor, bind: stop }),]); "91"; scene.caption = "    Note: After setting the parameters, press 'reset' and 'run'\n              sequentially to excute the program. \n\n"; "92"; scene.append_to_caption("    Ininial velocity (m/s): \n"); "95"; sl = RS_interpolate_kwargs.call(__this, slider, [RS_desugar_kwargs({ length: 300, top: 6, left: 80, value: 56.56, min: 30, max: 100, step: 0.1, bind: s1 }),]); "99"; wt = RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "{:.2f}".format(sl.value) }),]); "102"; scene.append_to_caption(" m/s\n"); "103"; scene.append_to_caption("\n    Elevation angle (degree): \n"); "105"; sl1 = RS_interpolate_kwargs.call(__this, slider, [RS_desugar_kwargs({ length: 300, top: 6, left: 80, value: 45, step: 1, min: 10, max: 90, bind: s2 }),]); "106"; wt1 = RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "{:.2f}".format(sl1.value) }),]); "108"; scene.append_to_caption(" (degree)\n"); "109"; scene.append_to_caption("\n"); "110"; scene.append_to_caption("    Gravity (m/s<sup>2<\/sup>):\n"); "112"; sl2 = RS_interpolate_kwargs.call(__this, slider, [RS_desugar_kwargs({ length: 300, top: 6, left: 80, value: 10, step: 0.5, min: 5, max: 30, bind: s3 }),]); "114"; wt2 = RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "{:.2f}".format(sl2.value) }),]); "115"; scene.append_to_caption("(m/s<sup>2</sup>)\n\n"); "116"; scene.append_to_caption("    Coefficient of restitution:\n"); "117"; sl3 = RS_interpolate_kwargs.call(__this, slider, [RS_desugar_kwargs({ length: 300, top: 6, left: 80, value: 0, min: 0, max: 1, step: 0.05, bind: s4 }),]); "119"; wt3 = RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "{:.3f}".format(sl3.value) }),]); "120"; scene.append_to_caption("\n\n"); "123"; if (!M.__argnames__) { Object.defineProperties(M, { __argnames__: { value: ["m",] } }); } ; "168"; recover = sl3.value; "172"; v0 = sl.value; "173"; theta = sl1.value; "174"; vx = v0["*"](cos(theta["*"](pi)["/"](180))); "175"; vy = v0["*"](sin(theta["*"](pi)["/"](180))); "176"; vz = 0; "177"; initv = vec(vx, vy, vz); "178"; g2 = sl2.value; "181"; ga = vec(0, g2["-u"](), 0); "182"; inita = ga; "184"; gxmax = 2["*"](vx)["*"](vy)["/"](g); "185"; gymax = GS_power(vy, 2)["/"](2)["/"](g); "188"; if ((((recover === 0) || ((typeof recover === "object") && RS_equals(recover, 0))))) { "189"; dt = 0.00004; "190"; tmax = 2["*"](vy)["/"](g); "194"; } else { "195"; dt = 0.00003; "196"; tmax = 2["*"](flen1)["/"](vx); "197"; gxmax = 1.02["*"](flen1); } ; "199"; if (vx["<="](0.0001)) { "200"; tmax = 12["*"](vy)["/"](g); "201"; gxmax = 0; } ; "204"; Te = RS_interpolate_kwargs.call(__this, text, [RS_desugar_kwargs({ pos: vec(0.1["*"](flen1), 25, 0), height: 80, text: "Chen-Lin \nSloth Physics", align: "center", emissive: false, shininess: 1, depth: 1["*"](18), color: vec(228["/"](255), 252["/"](255), 180["/"](255)) }),]); "212"; "278"; if (!motion.__argnames__) { Object.defineProperties(motion, { __argnames__: { value: ["_",] } }); } ; "348";
+
+
+      "423";
+      setup();
+      "424";
+      scene.autoscale = false;
+      "426"; return (function ___(__break) { var __more; var __loop = __cb(_, __frame, 0, 0, function __$main() { __more = false;
+          var __2 = !end; if (__2) {
+            "427";
+            return rate(1000, __cb(_, __frame, 443, 8, function __$main() {
+              "428";
+              RS_interpolate_kwargs.call(Te, Te.rotate, [RS_desugar_kwargs({ angle: 0.0006["-u"](), axis: vector(0, 1, 0) }),]);
+              "430"; return (function __$main(__then) {
+                if (running) {
+                  "432";
+                  Te.visible = false;
+                  "433";
+                  t = 0;
+                  "434";
+                  return motion(__cb(_, __frame, 453, 12, __then, true)); } else { __then(); } ; })(function __$main() {
+
+                "438";
+                if (re) {
+                  "439";
+                  Te.visible = true;
+                  "440";
+                  btrail.clear();
+                  "444";
+                  init(); } ; while (__more) { __loop(); }; __more = true; }); }, true)); } else { __break(); } ; }); do { __loop(); } while (__more); __more = true; })(_); }, true)); });};if (!main.__argnames__) { Object.defineProperties(main, {
+    __argnames__: { value: ["_",] } });};
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; main(__func) })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
